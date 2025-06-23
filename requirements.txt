@@ -1,0 +1,7 @@
+geographiclib
+geopy
+maidenhead
+mobile-codes
+requests
+tabulate
+urllib3
