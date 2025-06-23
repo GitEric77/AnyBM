@@ -1,6 +1,6 @@
 # MOTOTRBO Zone Generator - Streamlit Frontend
 
-This is a web-based frontend for the MOTOTRBO zone file generator that uses the BrandMeister API to retrieve DMR repeater information and generate zone files for Motorola DMR radios.
+This is a web-based frontend for the Anytone zone file generator that uses the BrandMeister API to retrieve DMR repeater information and generate zone files for Anytone DMR radios.
 
 ## Installation
 If you want to host your own copy of the webapp you can leverage the userdata file to bootstrap a linux machine (I host on AWS using Amazon Linux 2023). In general the install is:
@@ -20,49 +20,42 @@ If you want to host your own copy of the webapp you can leverage the userdata fi
 
 ## Features
 
-- **User-friendly interface** for generating MOTOTRBO zone files
-- **Standard Mode** for creating zone files with all repeaters
-- **Talkgroup Mode** for creating zone files with active talkgroups and respective contacts
-- **Download** generated XML files and contacts.csv directly from the browser
+- **User-friendly interface** for generating Anytone CPS files
+- **Standard Mode** for creating a zone file with all repeaters
+- **Talkgroup Mode** for creating a zone file with active talkgroups and respective channels
+- **Download** generated CSV files and contacts.csv directly from the browser
 - **Bulk Download** all generated files in a single ZIP archive
 - **City Prefix** option to name channels with city abbreviation and talkgroup name
 - **Unique Session IDs** for multiple users to work simultaneously
-- **Visualize** zone file and contact output in the web interface
+- **Visualize** zone file, channels, and talkgroup output in the web interface
 
 ## Usage
 
 ### Standard Mode
 1. Enter a zone name
-2. Select the band (VHF or UHF)
+2. Select the band (VHF, UHF, or Both)
 3. Choose a search type (MCC, QTH, or GPS)
 4. Fill in the required fields based on your search type
 5. Configure additional options as needed
-6. Click "Generate Zone Files"
-7. Download the generated XML file or as a ZIP archive
+6. Click "Generate Talkgroup Files"
+7. Download the generated CSV file or as a ZIP archive
 
 ### Talkgroup Mode
-1. Select the band (VHF or UHF)
+1. Select the band (VHF, UHF. or Both)
 2. Choose a search type (MCC, QTH, or GPS)
 3. Fill in the required fields based on your search type
 4. Optionally enable "Use city abbreviation prefix for channel names" to add city prefixes to channels Ex: BUR.MN State
 5. Configure additional options as needed
 6. Click "Generate Talkgroup Files"
-7. Download the generated XML files and contacts.csv individually or as a ZIP archive
+7. Download the generated CSV files individually or as a ZIP archive
 
-### Custom Contact Template
-1. Download the default contact_template.csv
+### Custom Talkgroup Template
+1. Download the default talkgroup_template.csv
 2. Modify the template with your preferred contact names (ensure to specify Group Call or Private Call)
-3. Upload your modified template using the "Upload Custom Contact Template"
+3. Upload your modified template using the "Upload Custom Talkgroup Template"
 4. Your custom template will be used when generating talkgroup files
 
-## Importing to CPS2
-!!!You must import contacts prior to pasting zone files!!!
-### Contacts (Talkgroup Mode)
-1. In CPS2, go to Contacts → Contacts, click on button with three dots above contacts list and select import
-2. Select the contacts.csv file
-
-### Zone Files
-1. Open the XML file in a text editor
-2. Select all data in XML file and copy (Ctrl+a, Ctrl+c)
-3. In CPS2, go to Configuration → Zone/Channel Assignment
-4. Right-click on word Zone and choose paste (Ctrl+v)
+### Importing to CPS
+* Open CPS, go to `Tools -> Import'
+* Select the generated talkgroups, channels, and zones csv files
+* Import

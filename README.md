@@ -1,10 +1,7 @@
-# MotoBM
-MOTOTRBO Zone Generator makes use of [BrandMeister API](https://wiki.brandmeister.network/index.php/API/Halligan_API) to retrieve a list of DMR repeaters and create xml files for importing into Motorola CPS2 as zones, filtered by country or location. This is a branch of yl3im (Inga's) motobm repo https://github.com/yl3im/motobm. Inga's original creation of motobm inspired me to iterate the solution based on different use cases (talkgroups with contacts and a web app).
+# AnyBM
+Anytone Zone Generator makes use of [BrandMeister API](https://wiki.brandmeister.network/index.php/API/Halligan_API) to retrieve a list of DMR repeaters and create CSV files for importing into Anytone CPS as talkgroups, channels, and zones filtered by country or location.
 
-# What is MotoTRBO Zone Generator
-https://youtu.be/t4NljXAuGx8
-
-# How to use MotoTRBO Zone Generator
+# How to use Anyton Zone Generator
 https://youtu.be/cRO7uoUekoY
 
 ## Web App
@@ -13,7 +10,7 @@ See README_streamlit.md for installation and usage with web front end.
 # Installation (command line only)
 Make sure you have python installed.
 
-* `git clone https://github.com/GitEric77/motobm.git`
+* `git clone https://github.com/GitEric77/AnyBM.git`
 * `pip install -r requirements.txt` as root or `pip install -r requirements.txt --user` as ordinary user.
 
 ## Usage
@@ -51,7 +48,7 @@ optional arguments:
 ```
 ## Output Files
 
-By default, all generated files (zone XML files and contacts.csv) are saved to the `output` directory. You can specify a different output directory using the `-o` or `--output` parameter:
+By default, all generated files are saved to the `output` directory. You can specify a different output directory using the `-o` or `--output` parameter:
 
 ## Examples
 
@@ -116,10 +113,10 @@ This will save all generated files to the `my_zones` directory instead of the de
 
 When using the `-tg` flag, the script operates in talkgroup mode:
 
-1. Creates a separate zone file for each repeater with active talkgroups (ignoring -n argument)
+1. Creates a separate zone for each repeater with active talkgroups (ignoring -n argument)
 2. Names each zone file based on the repeater's callsign and city
 3. Abbreviates zone aliases to fit within 16 characters (radio display limit)
-4. Creates a contacts.csv file with all unique talkgroup IDs
+4. Creates a talkgroups.csv file with all unique talkgroup IDs
 5. Fetches talkgroup names from the BrandMeister API and adds them to contacts.csv
 
 When using the `--city-prefix` flag with talkgroup mode:
@@ -127,26 +124,15 @@ When using the `--city-prefix` flag with talkgroup mode:
 2. A dot separator will be added between the city abbreviation and the talkgroup name
 3. Total channel name length will still be limited to 16 characters
 
-The contacts.csv file can be imported into CPS2 to create digital contacts for all talkgroups.
 
-## Contact Template
-Contacts are only created when using the -tg or --talkgroups argument. Contacts added to 'contact_template.csv' will be preserved in the contacts.csv output file. Modify contact_template.csv if you want contacts (and channel names) named differently than the talkgroup name in Brandmeister.
+## Talkgroups Template
+Talkgroups are only created when using the -tg or --talkgroups argument. Talkgroups added to 'talkgroups_template.csv' will be preserved in the talkgroups.csv output file. Modify talkgroups_template.csv if you want contacts (and channel names) named differently than the talkgroup name in Brandmeister.
 
-You can also leave the default contact_template.csv file alone and place a custom contact_template.csv file in the 'contact_uploads' directory, which will be used instead of the default template. When using the Streamlit web interface, you can upload your custom template directly through the app.
+When using the Streamlit web interface, you can upload your custom template directly through the app.
 
-## Importing files to CPS2
+## Importing files to CPS
 
-### Importing contacts if you use talkgroup mode (-tg)
-* Open CPS2, go to `Contacts` -> `Digital`
-* Click on `Import...` and select the contacts.csv file from the output directory
-* Follow the import wizard to map the columns correctly
-
-### Importing Zone Files
-* Open the XML file contents in text editor, like Notepad.
-* Select All. Copy.
-* Open CPS2, on its left pane go to `Configuration` -> `Zone/Channel Assignment`, right-click on `Zone` and choose Paste.
-* If you didnt use -tg argument, don't forget to set up the parameters for the new zone, like `Tx Contact Name` and `Rx Group List`. Can be done at once with `Fill Down` feature in CPS2.
-
-## What about CPS16?
-
-Unfortunately, CPS16 doesn't support pasting of XML content. Therefore this method only works for CPS2.
+### Importing to CPS
+* Open CPS, go to `Tools -> Import'
+* Select the generated talkgroups, channels, and zones csv files
+* Import
