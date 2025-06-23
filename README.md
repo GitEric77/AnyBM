@@ -1,8 +1,8 @@
 # AnyBM
-Anytone Zone Generator makes use of [BrandMeister API](https://wiki.brandmeister.network/index.php/API/Halligan_API) to retrieve a list of DMR repeaters and create CSV files for importing into Anytone CPS as talkgroups, channels, and zones filtered by country or location.
+Anytone Zone Generator makes use of [BrandMeister API](https://wiki.brandmeister.network/index.php/API/Halligan_API) to retrieve a list of DMR repeaters and create CSV files for importing into Anytone CPS 3.08 as talkgroups, channels, and zones filtered by country or location.
 
 # How to use Anyton Zone Generator
-https://youtu.be/cRO7uoUekoY
+https://youtu.be/sxCrO423fZA
 
 ## Web App
 See README_streamlit.md for installation and usage with web front end.
@@ -18,7 +18,7 @@ Make sure you have python installed.
 ```
 usage: zone.py [-h] [-f] [-n NAME] -b {vhf,uhf} -t {mcc,qth,gps} [-m MCC] [-q QTH] [-r RADIUS] [-lat LAT] [-lon LON] [-p [PEP]] [-6] [-zc ZONE_CAPACITY] [-c] [-cs CALLSIGN] [-tg] [--city-prefix] [-o OUTPUT]
 
-Generate MOTOTRBO zone files from BrandMeister.
+Generate Anytone CPS import files from BrandMeister.
 
 optional arguments:
   -h, --help            show this help message and exit
