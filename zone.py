@@ -140,10 +140,11 @@ def filter_list():
         if args.callsign and (not args.callsign in item['callsign']):
             continue
 
-        if item['callsign'] == '':
-            item['callsign'] = item['id']
+        if item['callsign'] == '' or item['callsign'] is None:
+            item['callsign'] = str(item['id'])
 
-        item['callsign'] = item['callsign'].split()[0]
+        if item['callsign'] is not None:
+            item['callsign'] = item['callsign'].split()[0]
 
         if any((existing['rx'] == item['rx'] and existing['tx'] == item['tx'] and existing['callsign'] == item[
             'callsign']) for existing in filtered_list):
@@ -200,7 +201,7 @@ def format_channel(item):
     global output_list
 
     # Create city abbreviation
-    city = item['city'].split(',')[0].strip()
+    city = item['city'].split(',')[0].strip() if item['city'] else 'Unknown'
     city_abbr = city[:3].upper() if len(city) >= 3 else (city + 'XXX')[:3].upper()
     
     # Create channels for both timeslots
@@ -575,7 +576,7 @@ def write_zones_csv():
                     if not tg_channels:
                         continue
                     
-                    city = item['city'].split(',')[0].strip()
+                    city = item['city'].split(',')[0].strip() if item['city'] else 'Unknown'
                     callsign = item['callsign']
                     zone_name = f"{callsign}_{city.replace(' ', '_')}"
                     
@@ -622,7 +623,7 @@ def write_zones_csv():
                 
                 for item in chunk:
                     # Create city abbreviation
-                    city = item['city'].split(',')[0].strip()
+                    city = item['city'].split(',')[0].strip() if item['city'] else 'Unknown'
                     city_abbr = city[:3].upper() if len(city) >= 3 else (city + 'XXX')[:3].upper()
                     
                     # Create channels for both timeslots with same logic as channels.csv
